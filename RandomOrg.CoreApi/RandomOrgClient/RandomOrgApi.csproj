@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
+	<LangVersion>latest</LangVersion>
+    <AssemblyName>RandomOrg.CoreApi</AssemblyName>
+    <RootNamespace>RandomOrg.CoreApi</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://api.random.org/json-rpc/4</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RandomOrg/JSON-RPC-.NET</RepositoryUrl>
+    <PackageTags>RANDOM.ORG, random, randomness, client</PackageTags>
+    <PackageReleaseNotes>This is the first release of the official .NET library for the RANDOM.ORG Core API (R4). For more information please check the corresponding Github repository (https://github.com/RandomOrg/JSON-RPC-.NET) or the RANDOM.ORG JSON-RPC Core API documentation (https://api.random.org/json-rpc/4).</PackageReleaseNotes>
+    <Description>RANDOM.ORG JSON-RPC API (Release 4) implementation for .NET.</Description>
+    <Authors>RANDOM.ORG</Authors>
+    <Company>RANDOM.ORG</Company>
+    <Version>1.0.0</Version>
+    <PackageIcon>icon.png</PackageIcon>
+	<PackageIconUrl></PackageIconUrl>
+    <Copyright>Copyright © RANDOM.ORG 2021</Copyright>
+    <RepositoryType>git</RepositoryType>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<PackageId>RandomOrg.CoreApi</PackageId>
+	<Product>RandomOrg.CoreApi</Product>
+	<ApplicationIcon />
+	<OutputType>Library</OutputType>
+	<StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
