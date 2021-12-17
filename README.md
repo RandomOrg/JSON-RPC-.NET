@@ -2,7 +2,7 @@
 JSON-RPC-.NET
 ===============
 
-This is a .NET implementation of the RANDOM.ORG JSON-RPC API (Release 4), which supports .NET Standard 2.0+, .NET Core 2.0+, .NET 5 and .NET Framework 4.6.1+.
+This is the official .NET implementation of the RANDOM.ORG JSON-RPC API (Release 4), which supports .NET Standard 2.0+, .NET Core 2.0+, .NET 5 and .NET Framework 4.6.1+.
 
 It provides either serialized or unserialized access to both the signed and unsigned methods of the API through the RandomOrgClient class. It also provides a convenience class through the RandomOrgClient class, the RandomOrgCache, for precaching requests. In the context of this module, a serialized client is one for which the sequence of requests matches the sequence of responses.
 
@@ -143,6 +143,9 @@ try {
 
 [8, 10, 10, 4, 0]
 ```
+Signature Verification
+----------------------
+There are two additional methods to generate signature verification URLs and HTML forms (*CreateUrl* and *CreateHtml*) using the random object and signature returned from any of the signed (value generating) methods. The generated URLs and HTML forms link to the same web page that is also shown when a result is verified using the online [Signature Verification Form](https://api.random.org/signatures/form).
 
 Documentation
 -------------

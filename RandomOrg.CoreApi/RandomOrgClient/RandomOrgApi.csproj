@@ -9,13 +9,13 @@
     <PackageProjectUrl>https://api.random.org/json-rpc/4</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RandomOrg/JSON-RPC-.NET</RepositoryUrl>
     <PackageTags>RANDOM.ORG, random, randomness, client</PackageTags>
-    <PackageReleaseNotes>This is the first release of the official .NET library for the RANDOM.ORG Core API (R4). For more information please check the corresponding Github repository (https://github.com/RandomOrg/JSON-RPC-.NET) or the RANDOM.ORG JSON-RPC Core API documentation (https://api.random.org/json-rpc/4).</PackageReleaseNotes>
-    <Description>RANDOM.ORG JSON-RPC API (Release 4) implementation for .NET.</Description>
+    <PackageReleaseNotes>This is a minor update to the documentation of this library. For more information please check the corresponding Github repository (https://github.com/RandomOrg/JSON-RPC-.NET) or the RANDOM.ORG JSON-RPC Core API documentation (https://api.random.org/json-rpc/4).</PackageReleaseNotes>
+    <Description>The official RANDOM.ORG JSON-RPC API (Release 4) implementation for .NET.</Description>
     <Authors>RANDOM.ORG</Authors>
     <Company>RANDOM.ORG</Company>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageIcon>icon.png</PackageIcon>
-	<PackageIconUrl></PackageIconUrl>
+	<PackageIconUrl>https://github.com/RandomOrg/JSON-RPC-.NET/blob/main/RandomOrg.CoreApi/RandomOrgClient/icon.png?raw=true</PackageIconUrl>
     <Copyright>Copyright © RANDOM.ORG 2021</Copyright>
     <RepositoryType>git</RepositoryType>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
