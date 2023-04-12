@@ -421,6 +421,18 @@ namespace RandomOrgClientTest
         }
 
         [TestMethod]
+        public void TestRevealTicketsSingle()
+        {
+            TicketRevealHelper(1);
+        }
+
+        [TestMethod]
+        public void TestRevealTicketsMultiple()
+        {
+            TicketRevealHelper(3);
+        }
+
+        [TestMethod]
         public void TestListTickets()
         {
             string[] types = { "singleton", "head", "tail" };
@@ -531,6 +543,43 @@ namespace RandomOrgClientTest
             }
 
             Assert.IsTrue(roc.VerifySignature((JObject)o["random"], (string)o["signature"]));
+        }
+
+        private void TicketRevealHelper(int n)
+        {
+            Dictionary<string, Dictionary<string, object>> results = new Dictionary<string, Dictionary<string, object>>();
+            Dictionary<string, object> get = null;
+
+            string ticket = (string)roc.CreateTickets(1, false)[0]["ticketId"];
+
+            for(int i = 0; i < n; i++)
+            {
+                if (i > 0)
+                {
+                    ticket = (string)((JObject)get["result"])["nextTicketId"];
+                }
+
+                results.Add(ticket, roc.GenerateSignedIntegers(5, 0, 10, ticketId: ticket));
+
+                // Result should be unavailable pre-reveal.
+                get = roc.GetTicket(ticket);
+                Assert.IsFalse(get.ContainsKey("data"));
+            }
+
+            // Revealing the most recently used ticket should return a ticketCount of n.
+            int ticketCount = roc.RevealTickets(ticket);
+            Assert.AreEqual(n, ticketCount);
+
+            foreach (KeyValuePair<string, Dictionary<string, object>> entry in results)
+            {
+                string ticketId = entry.Key;
+                Dictionary<string, object> result = entry.Value;
+
+                // Results should now be available and match the original responses.
+                get = roc.GetTicket(ticketId);
+                Assert.IsTrue(get.ContainsKey("data"));
+                Assert.IsTrue(CheckEquality((int[])result["data"], (int[])get["data"]));
+            }
         }
 
         private bool CheckEquality<T>(T[] o, T[] o2)

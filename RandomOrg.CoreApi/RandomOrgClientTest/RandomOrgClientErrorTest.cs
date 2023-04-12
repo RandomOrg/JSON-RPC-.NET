@@ -204,6 +204,28 @@ namespace RandomOrgClientTest
         }
 
         [TestMethod]
+        public void TestRandomOrgError426()
+        {
+            try
+            {
+                string ticketId = (string)roc.CreateTickets(1, true)[0]["ticketId"];
+
+                roc.RevealTickets(ticketId);
+
+                Assert.Fail("Should have thrown RandomOrgRANDOMORGError 426");
+            }
+            catch (RandomOrgRANDOMORGException e)
+            {
+                Assert.AreEqual(e.code, 426);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Should have thrown RandomOrgRANDOMORGError 426, instead threw "
+                    + e.Message);
+            }
+        }
+
+        [TestMethod]
         public void TestUrlTooLongError()
         {
             Dictionary<string, object> bigRequest = roc.GenerateSignedIntegers(2000, 0, 10);

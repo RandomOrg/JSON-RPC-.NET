@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net6.0;net5.0;netstandard2.0</TargetFrameworks>
 	<LangVersion>latest</LangVersion>
     <AssemblyName>RandomOrg.CoreApi</AssemblyName>
     <RootNamespace>RandomOrg.CoreApi</RootNamespace>
@@ -9,11 +9,11 @@
     <PackageProjectUrl>https://api.random.org/json-rpc/4</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RandomOrg/JSON-RPC-.NET</RepositoryUrl>
     <PackageTags>RANDOM.ORG, random, randomness, client</PackageTags>
-    <PackageReleaseNotes>This is a minor update to the documentation of this library. For more information please check the corresponding Github repository (https://github.com/RandomOrg/JSON-RPC-.NET) or the RANDOM.ORG JSON-RPC Core API documentation (https://api.random.org/json-rpc/4).</PackageReleaseNotes>
+    <PackageReleaseNotes>This is a minor update to add the RevealTickets method and RandomOrgRANDOMORGException with code 426. Also updated the target frameworks to include .NET 6.0 and 7.0. For more information please check the corresponding Github repository (https://github.com/RandomOrg/JSON-RPC-.NET) or the RANDOM.ORG JSON-RPC Core API documentation (https://api.random.org/json-rpc/4).</PackageReleaseNotes>
     <Description>The official RANDOM.ORG JSON-RPC API (Release 4) implementation for .NET.</Description>
     <Authors>RANDOM.ORG</Authors>
     <Company>RANDOM.ORG</Company>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <PackageIcon>icon.png</PackageIcon>
 	<PackageIconUrl>https://github.com/RandomOrg/JSON-RPC-.NET/blob/main/RandomOrg.CoreApi/RandomOrgClient/icon.png?raw=true</PackageIconUrl>
     <Copyright>Copyright © RANDOM.ORG 2021</Copyright>

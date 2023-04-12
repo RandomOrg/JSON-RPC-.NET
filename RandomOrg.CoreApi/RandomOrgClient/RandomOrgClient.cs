@@ -53,6 +53,7 @@ namespace RandomOrg.CoreApi
         private const string VerifySignatureMethod = "verifySignature";
         private const string GetResultMethod = "getResult";
         private const string CreateTicketMethod = "createTickets";
+        private const string RevealTicketMethod = "revealTickets";
         private const string ListTicketMethod = "listTickets";
         private const string GetTicketMethod = "getTicket";
 
@@ -92,7 +93,7 @@ namespace RandomOrg.CoreApi
 
         private static readonly HashSet<int> RandomOrgErrors = new HashSet<int>
             { 100, 101, 200, 201, 202, 203, 204, 300, 301, 302, 303, 304, 305, 306, 307,
-            400, 401, 402, 403, 404, 405, 420, 421, 422, 423, 424, 425, 500, 32000 };
+            400, 401, 402, 403, 404, 405, 420, 421, 422, 423, 424, 425, 426, 500, 32000 };
 
         private readonly string apiKey;
         private readonly long blockingTimeout;
@@ -1142,6 +1143,44 @@ namespace RandomOrg.CoreApi
         }
 
         /// <summary>
+        /// Marks a specific ticket and all its predecessors in its chain as being revealed, meaning that
+        /// subsequent calls to <see cref="GetTicket(string)"/> will return the full details of the tickets,
+        /// including the random values produced when the tickets were used. Using this method effectively
+        /// changes the value of <b>showResult</b> (which was specified when the first ticket in the chain
+        /// was created) from <i>false</i> to true. The reason that not only the ticket specified (but also
+        /// its predecessors in its chain) are revealed is to ensure maximum transparency. This method does
+        /// not affect any successors to the ticket in the chain.
+        /// <para/>
+        /// Click <a href="https://api.random.org/json-rpc/4/signed#revealTickets">here</a> for more information.
+        /// </summary>
+        /// <param name="ticketId">A string value that uniquely identifies the ticket.</param>
+        /// <returns>A number value that specifies how many tickets were revealed. This will
+        /// include the ticket specified as well as all its predecessors. If this method is invoked
+        /// on a ticket that is already revealed (or which was created with <b>showResult</b> set to
+        /// <i>true</i>), then the value returned will be zero.</returns>
+        /// <exception cref="RandomOrgSendTimeoutException">Thrown when blocking timeout is exceeded before the request can be sent. </exception>
+        /// <exception cref="RandomOrgKeyNotRunningException">Thrown when the API key has been stopped. </exception>
+        /// <exception cref="RandomOrgInsufficientRequestsException">Thrown when the API key's server requests allowance has been exceeded.</exception>
+        /// <exception cref="RandomOrgInsufficientBitsException">Thrown when the API key's server bits allowance has been exceeded.</exception>
+        /// <exception cref="RandomOrgBadHTTPResponseException">Thrown when a HTTP 200 OK response is not received.</exception>
+        /// <exception cref="RandomOrgRANDOMORGException">Thrown when the server returns a RANDOM.ORG Error.</exception>
+        /// <exception cref="RandomOrgJSONRPCException">Thrown when the server returns a JSON-RPC Error.</exception>
+        /// <exception cref="IOException">Thrown when an I/O error occurs.</exception>
+        public int RevealTickets(string ticketId)
+        {
+            JObject request = new JObject
+            {
+                {"ticketId", ticketId }
+            };
+
+            request = this.GenerateKeyedRequest(request, RevealTicketMethod);
+
+            JObject response = this.SendRequest(request);
+
+            return this.ExtractTicketCount(response);
+        }
+
+        /// <summary>
         /// Obtain information about tickets linked with your API key. The maximum number of tickets that can be returned by this method is 2000. 
         /// See <a href="https://api.random.org/json-rpc/4/signed#listTickets">here</a>.
         /// </summary>
@@ -2178,6 +2217,17 @@ namespace RandomOrg.CoreApi
                 tickets[i] = (JObject)t[i];
             }
             return tickets;
+        }
+
+        /// <summary>
+        /// Extracts the "ticketCount" property from a JSON response returned
+        /// from a call to the "revealTickets" method.
+        /// </summary>
+        /// <param name="response">JSON from which to extract data.</param>
+        /// <returns>extracted number value that specifies how many tickets were revealed.</returns>
+        protected int ExtractTicketCount(JObject response)
+        {
+            return (int)response["result"]["ticketCount"];
         }
 
         /// <summary>

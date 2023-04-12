@@ -2,7 +2,7 @@
 JSON-RPC-.NET
 ===============
 
-This is the official .NET implementation of the RANDOM.ORG JSON-RPC API (Release 4), which supports .NET Standard 2.0+, .NET Core 2.0+, .NET 5 and .NET Framework 4.6.1+.
+This is the official .NET implementation of the RANDOM.ORG JSON-RPC API (Release 4), which supports .NET Standard 2.0+, .NET Core 2.0+, .NET 5.0, 6.0, and 7.0, and .NET Framework 4.6.1+.
 
 It provides either serialized or unserialized access to both the signed and unsigned methods of the API through the RandomOrgClient class. It also provides a convenience class through the RandomOrgClient class, the RandomOrgCache, for precaching requests. In the context of this module, a serialized client is one for which the sequence of requests matches the sequence of responses.
 
